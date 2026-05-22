@@ -526,6 +526,101 @@
       margin-top: 4px;
     }
 
+    /* ─ Developer box ─ */
+    .dev-box {
+      background: rgba(99,102,241,.07);
+      border: 1px solid rgba(99,102,241,.2);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 28px;
+      animation: fadeUp .5s .38s ease both;
+    }
+
+    .dev-box-header { margin-bottom: 10px; }
+
+    .dev-tag {
+      display: inline-block;
+      background: rgba(99,102,241,.2); color: #a5b4fc;
+      font-size: 10px; font-weight: 900; letter-spacing: .1em;
+      padding: 3px 10px; border-radius: 6px;
+      font-family: var(--mono);
+      margin-bottom: 8px;
+    }
+
+    .dev-title {
+      font-size: 16px; font-weight: 900;
+      color: #e2e8f0; margin: 0 0 10px;
+    }
+
+    .dev-lead {
+      font-size: 12px; color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    .dev-section { margin-bottom: 18px; }
+    .dev-section:last-child { margin-bottom: 0; }
+
+    .dev-section-title {
+      font-size: 11px; font-weight: 900;
+      color: #818cf8; letter-spacing: .06em;
+      margin-bottom: 8px;
+    }
+
+    .dev-body {
+      font-size: 13px; color: #94a3b8;
+      line-height: 1.7; margin-bottom: 8px;
+    }
+
+    .dev-body code, .dev-caption code {
+      font-family: var(--mono);
+      background: rgba(255,255,255,.08);
+      padding: 1px 5px; border-radius: 4px;
+      font-size: 12px; color: #e2e8f0;
+    }
+
+    .dev-code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: rgba(0,0,0,.3);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .dev-code--good { border-left: 3px solid #4ade80; }
+    .dev-code--bad  { border-left: 3px solid #f87171; }
+
+    .dc-scheme  { color: #818cf8; }
+    .dc-sub     { color: #38bdf8; }
+    .dc-domain  { color: #f472b6; font-weight: 900; }
+    .dc-domain-bad { color: #f87171; font-weight: 900; }
+    .dc-path    { color: #4ade80; }
+    .dc-query   { color: #fbbf24; }
+    .dc-dim     { color: #475569; }
+
+    .dev-legend {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .dl-item {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 11px; color: #64748b;
+    }
+
+    .dl-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dev-caption {
+      font-size: 12px; color: #64748b; line-height: 1.6;
+    }
+
+    .dev-caption strong { color: #94a3b8; }
+
     /* ─ Official resources ─ */
     .resources {
       display: grid; gap: 10px;
@@ -870,25 +965,25 @@
 
           <div class="share-template">
             <div class="share-label">パターン A　<span class="share-label-sub">（より自然なやつ）</span></div>
-            <div class="share-msg">ねね、就活のやつでさ、1000円もらえるらしいから登録してくれない？<br />なんか就活終わってる人でもバレんらしい</div>
+            <div class="share-msg">ねね、就活のやつでさ、3000円もらえるらしいから登録してくれない？<br />なんか就活終わってる人でもバレんらしい</div>
             <div class="share-btns">
-              <a class="share-btn share-btn-line" href="https://line.me/R/msg/text/?%E3%81%AD%E3%81%AD%E3%80%81%E5%B0%B1%E6%B4%BB%E3%81%AE%E3%82%84%E3%81%A4%E3%81%A7%E3%81%95%E3%80%811000%E5%86%86%E3%82%82%E3%82%89%E3%81%88%E3%82%8B%E3%82%89%E3%81%97%E3%81%84%E3%81%8B%E3%82%89%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%AA%E3%81%84%EF%BC%9F%0A%E3%81%AA%E3%82%93%E3%81%8B%E5%B0%B1%E6%B4%BB%E7%B5%82%E3%82%8F%E3%81%A3%E3%81%A6%E3%82%8B%E4%BA%BA%E3%81%A7%E3%82%82%E3%83%90%E3%83%AC%E3%82%93%E3%82%89%E3%81%97%E3%81%84%0Ahttps%3A%2F%2Fmksmkss.github.io%2Fcareerlink.uso%2F%3Fv3" target="_blank" rel="noopener noreferrer">
+              <a class="share-btn share-btn-line" href="https://line.me/R/msg/text/?%E3%81%AD%E3%81%AD%E3%80%81%E5%B0%B1%E6%B4%BB%E3%81%AE%E3%82%84%E3%81%A4%E3%81%A7%E3%81%95%E3%80%813000%E5%86%86%E3%82%82%E3%82%89%E3%81%88%E3%82%8B%E3%82%89%E3%81%97%E3%81%84%E3%81%8B%E3%82%89%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%AA%E3%81%84%EF%BC%9F%0A%E3%81%AA%E3%82%93%E3%81%8B%E5%B0%B1%E6%B4%BB%E7%B5%82%E3%82%8F%E3%81%A3%E3%81%A6%E3%82%8B%E4%BA%BA%E3%81%A7%E3%82%82%E3%83%90%E3%83%AC%E3%82%93%E3%82%89%E3%81%97%E3%81%84%0Ahttps%3A%2F%2Fmksmkss.github.io%2Fcareerlink.uso%2F%3Fv3" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.104 2 11.167c0 2.887 1.417 5.47 3.636 7.18-.16.594-.516 2.088-.592 2.415-.093.406.149.4.314.291.13-.086 2.054-1.394 2.884-1.958.558.08 1.13.122 1.758.122 5.523 0 10-4.104 10-9.167C22 6.104 17.523 2 12 2z"/></svg>
                 LINEで送る
               </a>
-              <button class="share-btn share-btn-copy" onclick="copyText('ねね、就活のやつでさ、1000円もらえるらしいから登録してくれない？\nなんか就活終わってる人でもバレんらしい\nhttps://mksmkss.github.io/careerlink.uso/?v3', this)">コピー</button>
+              <button class="share-btn share-btn-copy" onclick="copyText('ねね、就活のやつでさ、3000円もらえるらしいから登録してくれない？\nなんか就活終わってる人でもバレんらしい\nhttps://mksmkss.github.io/careerlink.uso/?v3', this)">コピー</button>
             </div>
           </div>
 
           <div class="share-template">
             <div class="share-label">パターン B　<span class="share-label-sub">（シンプル版）</span></div>
-            <div class="share-msg">ねね、就活のやつでさ、1000円もらえるらしいから登録してくれない？</div>
+            <div class="share-msg">ねね、就活のやつでさ、3000円もらえるらしいから登録してくれない？</div>
             <div class="share-btns">
-              <a class="share-btn share-btn-line" href="https://line.me/R/msg/text/?%E3%81%AD%E3%81%AD%E3%80%81%E5%B0%B1%E6%B4%BB%E3%81%AE%E3%82%84%E3%81%A4%E3%81%A7%E3%81%95%E3%80%811000%E5%86%86%E3%82%82%E3%82%89%E3%81%88%E3%82%8B%E3%82%89%E3%81%97%E3%81%84%E3%81%8B%E3%82%89%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%AA%E3%81%84%EF%BC%9F%0Ahttps%3A%2F%2Fmksmkss.github.io%2Fcareerlink.uso%2F%3Fv3" target="_blank" rel="noopener noreferrer">
+              <a class="share-btn share-btn-line" href="https://line.me/R/msg/text/?%E3%81%AD%E3%81%AD%E3%80%81%E5%B0%B1%E6%B4%BB%E3%81%AE%E3%82%84%E3%81%A4%E3%81%A7%E3%81%95%E3%80%813000%E5%86%86%E3%82%82%E3%82%89%E3%81%88%E3%82%8B%E3%82%89%E3%81%97%E3%81%84%E3%81%8B%E3%82%89%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%A6%E3%81%8F%E3%82%8C%E3%81%AA%E3%81%84%EF%BC%9F%0Ahttps%3A%2F%2Fmksmkss.github.io%2Fcareerlink.uso%2F%3Fv3" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.104 2 11.167c0 2.887 1.417 5.47 3.636 7.18-.16.594-.516 2.088-.592 2.415-.093.406.149.4.314.291.13-.086 2.054-1.394 2.884-1.958.558.08 1.13.122 1.758.122 5.523 0 10-4.104 10-9.167C22 6.104 17.523 2 12 2z"/></svg>
                 LINEで送る
               </a>
-              <button class="share-btn share-btn-copy" onclick="copyText('ねね、就活のやつでさ、1000円もらえるらしいから登録してくれない？\nhttps://mksmkss.github.io/careerlink.uso/?v3', this)">コピー</button>
+              <button class="share-btn share-btn-copy" onclick="copyText('ねね、就活のやつでさ、3000円もらえるらしいから登録してくれない？\nhttps://mksmkss.github.io/careerlink.uso/?v3', this)">コピー</button>
             </div>
           </div>
 
@@ -949,6 +1044,45 @@
         </div>
       </div>
 
+      <!-- URL構造の解説 -->
+      <div class="dev-box">
+        <h2 class="dev-title">🔐 URLには「ニセモノ」を作れる仕掛けがある</h2>
+        <p class="dev-lead">これを知っているだけで、騙されにくくなります。</p>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ 「line.me が入っていれば本物」は間違い</div>
+          <p class="dev-body">
+            インターネットのアドレス（URL）は、誰でも好きな文字列を「前につける」ことができます。<br />
+            たとえば <strong style="color:#f87171">auth-verify.com</strong> というサイトを持っていれば、
+            その前に <strong style="color:#38bdf8">secure.line.me.</strong> と付けて
+            <strong style="color:#f87171">secure.line.me.auth-verify.com</strong> というアドレスを
+            数分・ほぼ無料で作れてしまいます。
+          </p>
+          <div class="dev-code dev-code--bad">❌&nbsp; secure.line.me.<strong>auth-verify.com</strong>/login</div>
+          <p class="dev-caption">← 「line.me」が入っていても、末尾の <strong>auth-verify.com</strong> が本当の運営者。LINEとは無関係。</p>
+        </div>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ URLの「本体」はどこ？</div>
+          <p class="dev-body">
+            アドレスの中で信頼できる部分は、<strong style="color:#e2e8f0">「https://」の直後にある、最初の「/」より前の、末尾2ブロック</strong>だけです。
+          </p>
+          <div class="dev-code dev-code--good">✅&nbsp; <strong>line.me</strong>/R/ti/p/@xxx　　← 末尾2ブロックが line.me ✓</div>
+          <div class="dev-code dev-code--bad">❌&nbsp; secure.line.<strong>auth-check.com</strong>/login　← 末尾2ブロックが auth-check.com ✗</div>
+          <p class="dev-caption">「/」より後ろの文字列（/invite?code=ABC など）はいくらでも長くなるので、そこに惑わされないようにしましょう。</p>
+        </div>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ 長いURLは怪しい？</div>
+          <p class="dev-body">
+            友達の招待リンクや認証URLは、本物でも長くなりがちです。<br />
+            大切なのは長さではなく、<strong style="color:#e2e8f0">末尾2ブロックのドメインが正規かどうか</strong>だけです。
+          </p>
+          <div class="dev-code dev-code--good">✅&nbsp; <strong>instagram.com</strong>/accounts/login?next=%2F　← 長くても本物</div>
+          <div class="dev-code dev-code--bad">❌&nbsp; <strong>instagram-secure.net</strong>/accounts/login　← 短くても偽物</div>
+        </div>
+      </div>
+
       <!-- やるべきこと -->
       <div class="safe-box">
         <h2>✅ 今すぐできる対策</h2>
@@ -969,16 +1103,24 @@
             <div class="safe-icon">✓</div>
             <div>もし入力してしまったら、<strong style="color:white">すぐにパスワード変更・全端末ログアウト・連携アプリの削除</strong>を行う</div>
           </div>
+          <div class="safe-item">
+            <div class="safe-icon">✓</div>
+            <div>少しでも違和感を感じたら、<strong style="color:white">そのメッセージの文章をそのままコピーして検索</strong>してみる。同じ手口の報告が出てくることが多い</div>
+          </div>
+          <div class="safe-item">
+            <div class="safe-icon">✓</div>
+            <div><strong style="color:white">トーク上で自分の名前・学校・電話番号を名乗らない</strong>。乗っ取られたアカウントからの返信には、個人情報を引き出そうとするパターンがある</div>
+          </div>
         </div>
       </div>
 
       <!-- 公式資料 -->
       <div class="section-label">公式資料</div>
       <div class="resources">
-        <a class="resource-link" href="https://www.kokusen.go.jp/pdf/n-20221221_2.pdf" target="_blank" rel="noopener noreferrer">
+        <a class="resource-link" href="https://www.kokusen.go.jp/news/data/n-20241119_2.html" target="_blank" rel="noopener noreferrer">
           <div>
             <div class="resource-name">国民生活センター</div>
-            <div class="resource-desc">フィッシング詐欺の手口と対策PDF</div>
+            <div class="resource-desc">そのメール、フィッシング詐欺！（2024年）</div>
           </div>
           <div class="resource-arrow">→</div>
         </a>
@@ -996,7 +1138,7 @@
           </div>
           <div class="resource-arrow">→</div>
         </a>
-        <a class="resource-link" href="https://support.line.me/hc/ja/articles/115003505631" target="_blank" rel="noopener noreferrer">
+        <a class="resource-link" href="https://help.line.me/line/smartphone/?contentId=20000437&lang=ja" target="_blank" rel="noopener noreferrer">
           <div>
             <div class="resource-name">LINE 公式：乗っ取り被害に遭ったら</div>
             <div class="resource-desc">被害時の対処法・相談窓口</div>
