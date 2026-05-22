@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CareerLink Bonus</title>
+
+  <meta property="og:title" content="CareerLink Bonus｜就活生限定 紹介キャンペーン" />
+  <meta property="og:description" content="友人紹介でギフト券がもらえる、就活生向け限定キャンペーン。LINE連携で30秒エントリー。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com/" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CareerLink Bonus｜就活生限定 紹介キャンペーン" />
+  <meta name="twitter:description" content="友人紹介でギフト券がもらえる、就活生向け限定キャンペーン。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green: #06c755;
+      --green-dim: #04a344;
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --red: #ef4444;
+      --red-light: #fef2f2;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --surface: #ffffff;
+      --border: rgba(15,23,42,0.08);
+      --radius: 20px;
+      --font: 'Noto Sans JP', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: #f0f4ff;
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ─── SCREEN MANAGER ─── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ─── FAKE SITE ─── */
+    #screen-fake {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #eef2ff 0%, #f0fdf4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .fake-card {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 28px;
+      padding: 32px 28px 28px;
+      box-shadow: 0 32px 80px rgba(15,23,42,0.12);
+      animation: fadeUp .4s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fake-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .fake-logo-mark {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      display: grid; place-items: center;
+      color: white; font-weight: 900; font-size: 16px;
+    }
+
+    .fake-logo-name { font-weight: 900; font-size: 17px; }
+
+    .fake-badge {
+      display: inline-block;
+      background: #ecfdf5; color: #059669;
+      font-size: 11px; font-weight: 900;
+      padding: 5px 12px; border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
+    .fake-h1 {
+      font-size: 30px; font-weight: 900;
+      line-height: 1.25; letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .fake-desc {
+      font-size: 14px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 22px;
+    }
+
+    .fake-reward {
+      background: linear-gradient(135deg, #eef2ff, #ecfeff);
+      border: 1px solid #dbeafe;
+      border-radius: 18px;
+      padding: 20px; text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .fake-reward-label { font-size: 12px; color: var(--muted); font-weight: 700; }
+
+    .fake-reward-amount {
+      font-size: 44px; font-weight: 900;
+      color: var(--blue); letter-spacing: -0.04em;
+      display: block; margin-top: 4px;
+    }
+
+    .fake-features { display: grid; gap: 8px; margin-bottom: 24px; }
+
+    .fake-feature {
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: #f8fafc;
+      font-size: 13px; font-weight: 700; color: #374151;
+    }
+
+    /* ── URGENCY BAR (典型的な詐欺演出) ── */
+    .urgency-bar {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 12px; font-weight: 900;
+      color: #c2410c;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .urgency-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1.2s ease infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(1.4); }
+    }
+
+    .line-btn {
+      width: 100%;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 17px;
+      font-size: 16px; font-weight: 900;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 12px 32px rgba(6,199,85,.3);
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .line-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(6,199,85,.38); }
+    .line-btn:active { transform: translateY(0); }
+
+    .line-icon {
+      width: 22px; height: 22px;
+      background: white; border-radius: 6px;
+      display: grid; place-items: center;
+    }
+
+    .line-icon svg { width: 16px; height: 16px; }
+
+    .fake-note {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 11px; color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    /* ─── LOADING SCREEN ─── */
+    #screen-loading {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #eef2ff 0%, #f0fdf4 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+
+    .loading-card {
+      width: 100%; max-width: 420px;
+      background: white;
+      border-radius: 28px;
+      padding: 48px 32px;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(15,23,42,0.12);
+    }
+
+    .spinner {
+      width: 52px; height: 52px;
+      border: 4px solid #dbeafe;
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      margin: 0 auto 28px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-h { font-size: 20px; font-weight: 900; margin-bottom: 10px; }
+    .loading-sub { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ── 「次の画面で何が起きるか」の予告 ── */
+    .loading-warning {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      font-size: 13px; font-weight: 700;
+      color: #92400e;
+      line-height: 1.7;
+    }
+
+    /* ─── REVEAL SCREEN ─── */
+    #screen-reveal {
+      min-height: 100vh;
+      background: var(--ink);
+      padding: 32px 20px 60px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .reveal-inner {
+      width: 100%; max-width: 520px;
+    }
+
+    /* ─ Header ─ */
+    .reveal-header {
+      text-align: center;
+      margin-bottom: 36px;
+      animation: fadeUp .5s ease both;
+    }
+
+    .reveal-eyebrow {
+      display: inline-block;
+      background: var(--red); color: white;
+      font-size: 11px; font-weight: 900; letter-spacing: .1em;
+      padding: 6px 14px; border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
+    .reveal-h1 {
+      font-size: 28px; font-weight: 900;
+      color: white; line-height: 1.3;
+      letter-spacing: -0.03em;
+    }
+
+    .reveal-h1 em { color: var(--red); font-style: normal; }
+
+    .reveal-sub {
+      margin-top: 12px;
+      font-size: 14px; color: #94a3b8; line-height: 1.7;
+    }
+
+    /* ─ What-just-happened box ─ */
+    .happened-box {
+      background: rgba(239,68,68,.08);
+      border: 1px solid rgba(239,68,68,.25);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 28px;
+      animation: fadeUp .5s .1s ease both;
+    }
+
+    .happened-box h2 {
+      font-size: 13px; font-weight: 900;
+      color: #fca5a5; letter-spacing: .08em;
+      margin-bottom: 14px;
+    }
+
+    .happened-steps { display: grid; gap: 10px; }
+
+    .happened-step {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 13px; color: #e2e8f0; line-height: 1.7;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(239,68,68,.2);
+      color: #fca5a5;
+      font-size: 11px; font-weight: 900;
+      display: grid; place-items: center;
+      margin-top: 2px;
+    }
+
+    .step-real { color: var(--red); font-weight: 900; }
+
+    /* ─ Red flags section ─ */
+    .section-label {
+      font-size: 11px; font-weight: 900; letter-spacing: .12em;
+      color: #475569; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .section-label::after {
+      content: ''; flex: 1;
+      height: 1px; background: rgba(255,255,255,.08);
+    }
+
+    .flags-grid {
+      display: grid; gap: 10px;
+      margin-bottom: 28px;
+      animation: fadeUp .5s .2s ease both;
+    }
+
+    .flag-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+
+    .flag-title {
+      font-size: 13px; font-weight: 900;
+      color: #fbbf24; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .flag-body { font-size: 13px; color: #94a3b8; line-height: 1.7; }
+
+    /* ─ Safe behavior box ─ */
+    .safe-box {
+      background: rgba(6,199,85,.08);
+      border: 1px solid rgba(6,199,85,.2);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 28px;
+      animation: fadeUp .5s .3s ease both;
+    }
+
+    .safe-box h2 {
+      font-size: 13px; font-weight: 900;
+      color: #86efac; letter-spacing: .08em;
+      margin-bottom: 14px;
+    }
+
+    .safe-list { display: grid; gap: 10px; }
+
+    .safe-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; color: #cbd5e1; line-height: 1.7;
+    }
+
+    .safe-icon { flex-shrink: 0; color: var(--green); font-size: 16px; margin-top: 1px; }
+
+    /* ─ URL checker demo ─ */
+    .url-demo {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 28px;
+      animation: fadeUp .5s .35s ease both;
+    }
+
+    .url-demo h2 {
+      font-size: 13px; font-weight: 900;
+      color: #e2e8f0; letter-spacing: .06em;
+      margin-bottom: 14px;
+    }
+
+    .url-examples { display: grid; gap: 8px; }
+
+    .url-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    .url-row.safe   { background: rgba(6,199,85,.08);  color: #86efac; border: 1px solid rgba(6,199,85,.15); }
+    .url-row.danger { background: rgba(239,68,68,.08); color: #fca5a5; border: 1px solid rgba(239,68,68,.15); }
+
+    .url-tag {
+      flex-shrink: 0;
+      font-size: 10px; font-weight: 900;
+      padding: 2px 7px; border-radius: 6px;
+    }
+
+    .url-row.safe   .url-tag { background: rgba(6,199,85,.2);  color: #4ade80; }
+    .url-row.danger .url-tag { background: rgba(239,68,68,.2); color: #f87171; }
+
+    .url-reason {
+      font-family: var(--font);
+      font-size: 11px; color: #64748b;
+      margin-top: 4px;
+    }
+
+    /* ─ Official resources ─ */
+    .resources {
+      display: grid; gap: 10px;
+      animation: fadeUp .5s .4s ease both;
+      margin-bottom: 28px;
+    }
+
+    .resource-link {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 16px 18px;
+      transition: background .15s;
+    }
+
+    .resource-link:hover { background: rgba(255,255,255,.09); }
+
+    .resource-name { font-size: 14px; font-weight: 900; color: white; }
+    .resource-desc { font-size: 12px; color: #64748b; margin-top: 3px; }
+    .resource-arrow { color: #475569; font-size: 18px; }
+
+    /* ─ Footer ─ */
+    .reveal-footer {
+      margin-top: 8px;
+      padding: 20px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      text-align: center;
+      animation: fadeUp .5s .45s ease both;
+    }
+
+    .reveal-footer p { font-size: 12px; color: #475569; line-height: 1.8; }
+    .reveal-footer strong { color: #64748b; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════
+       SCREEN 1: FAKE SITE
+  ══════════════════════════════ -->
+  <div id="screen-fake" class="screen active">
+    <div class="fake-card">
+
+      <div class="fake-logo">
+        <div class="fake-logo-mark">C</div>
+        <span class="fake-logo-name">CareerLink Bonus</span>
+      </div>
+
+      <div class="fake-badge">就活生限定・友人紹介キャンペーン</div>
+
+      <h1 class="fake-h1">友人紹介で<br />最大5,000円分<br />プレゼント</h1>
+
+      <p class="fake-desc">
+        就活仲間を紹介するだけで、Amazonギフト券を受け取れる限定キャンペーン。
+        登録はLINEで30秒。
+      </p>
+
+      <div class="fake-reward">
+        <div class="fake-reward-label">紹介1人につき</div>
+        <strong class="fake-reward-amount">¥1,000</strong>
+      </div>
+
+      <div class="fake-features">
+        <div class="fake-feature">✓ 大学生・就活生限定</div>
+        <div class="fake-feature">✓ LINE連携だけでエントリー完了</div>
+        <div class="fake-feature">✓ 友人が登録すると報酬発生</div>
+      </div>
+
+      <!-- 焦らせる演出（詐欺サイトの典型手口） -->
+      <div class="urgency-bar">
+        <div class="urgency-dot"></div>
+        残り枠 あと<strong style="margin:0 3px">7名</strong>｜このキャンペーンは<strong style="margin:0 3px">本日24時</strong>終了
+      </div>
+
+      <button class="line-btn" onclick="goLoading()">
+        <div class="line-icon">
+          <svg viewBox="0 0 24 24" fill="#06c755" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.104 2 11.167c0 2.887 1.417 5.47 3.636 7.18-.16.594-.516 2.088-.592 2.415-.093.406.149.4.314.291.13-.086 2.054-1.394 2.884-1.958.558.08 1.13.122 1.758.122 5.523 0 10-4.104 10-9.167C22 6.104 17.523 2 12 2z"/>
+          </svg>
+        </div>
+        LINEで続ける
+      </button>
+
+      <p class="fake-note">
+        ※ 本人確認のためLINE認証が必要です。<br />
+        個人情報は第三者に提供されません。
+      </p>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       SCREEN 2: LOADING
+  ══════════════════════════════ -->
+  <div id="screen-loading" class="screen">
+    <div class="loading-card">
+      <div class="spinner"></div>
+      <div class="loading-h">LINE認証に接続中…</div>
+      <p class="loading-sub">
+        本人確認を行っています。<br />
+        しばらくお待ちください。
+      </p>
+
+      <!-- ここで「次に何が起きるか」を予告 -->
+      <div class="loading-warning">
+        ⚠️ 本物の詐欺サイトなら、この次の画面で<br />
+        <strong>「LINEに届いた6桁の認証コードを入力してください」</strong><br />
+        と表示されます。<br />
+        入力した瞬間にアカウントが乗っ取られます。
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       SCREEN 3: REVEAL
+  ══════════════════════════════ -->
+  <div id="screen-reveal" class="screen">
+    <div class="reveal-inner">
+
+      <!-- Header -->
+      <div class="reveal-header">
+        <div class="reveal-eyebrow">⚠ 注意喚起デモ</div>
+        <h1 class="reveal-h1">これは<em>偽サイト</em>の<br />再現デモです。</h1>
+        <p class="reveal-sub">
+          今あなたが見ていたサイトは、<br />
+          フィッシング詐欺の手口を体験するために作られたものです。<br />
+          <strong style="color:#e2e8f0">個人情報・LINE情報は一切取得していません。</strong>
+        </p>
+      </div>
+
+      <!-- いま何が起きていたか -->
+      <div class="happened-box">
+        <h2>▸ いま何が起きていたか</h2>
+        <div class="happened-steps">
+          <div class="happened-step">
+            <div class="step-num">1</div>
+            <div>「就活生限定」「友達から来た」など<strong style="color:#e2e8f0">信頼できそうな文脈</strong>でリンクを踏ませる</div>
+          </div>
+          <div class="happened-step">
+            <div class="step-num">2</div>
+            <div>「残り7名」「本日24時終了」で<strong style="color:#e2e8f0">焦りを作り、冷静な判断を奪う</strong></div>
+          </div>
+          <div class="happened-step">
+            <div class="step-num">3</div>
+            <div>「LINEで続ける」を押させ、本物そっくりのLINEログイン画面（または認証コード入力画面）へ誘導する</div>
+          </div>
+          <div class="happened-step">
+            <div class="step-num">4</div>
+            <div class="step-real">→ 6桁の認証コードを入力した瞬間にアカウント乗っ取り完了</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 危険サインの見分け方 -->
+      <div class="section-label">危険サインの見分け方</div>
+      <div class="flags-grid">
+        <div class="flag-card">
+          <div class="flag-title">⚡ 焦らせる文言</div>
+          <div class="flag-body">「残り○名」「本日限り」「今すぐ」「急いで入力」── 焦りで判断力を下げるのが目的です。</div>
+        </div>
+        <div class="flag-card">
+          <div class="flag-title">🔗 URLが不自然</div>
+          <div class="flag-body">本物ドメインに似た偽ドメイン（例: lin-e.com, Iine.com）や、ランダムな文字列のURLは要注意。</div>
+        </div>
+        <div class="flag-card">
+          <div class="flag-title">👤 友達から来ても安全とは限らない</div>
+          <div class="flag-body">メッセージを送ってきた友達のアカウント自体が乗っ取られている可能性があります。</div>
+        </div>
+        <div class="flag-card">
+          <div class="flag-title">🔑 認証コードの要求</div>
+          <div class="flag-body">LINEの6桁コードは絶対に他人・外部サイトへ入力してはいけません。LINEの公式は要求しません。</div>
+        </div>
+        <div class="flag-card">
+          <div class="flag-title">🏢 運営情報が不明</div>
+          <div class="flag-body">特定商取引法に基づく表示・プライバシーポリシー・運営会社が明記されていないサイトは信頼できません。</div>
+        </div>
+      </div>
+
+      <!-- URLチェック練習 -->
+      <div class="url-demo">
+        <h2>🔍 本物と偽物のURL、見分けられる？</h2>
+        <div class="url-examples">
+          <div>
+            <div class="url-row safe"><span class="url-tag">本物</span>line.me/ja</div>
+          </div>
+          <div>
+            <div class="url-row danger"><span class="url-tag">偽物</span>lin-e.me/ja</div>
+            <div class="url-reason">← ハイフンが入っているだけで全く別のドメイン</div>
+          </div>
+          <div>
+            <div class="url-row danger"><span class="url-tag">偽物</span>Iine.me/ja</div>
+            <div class="url-reason">← 先頭が大文字Iのため小文字Lと見分けにくい</div>
+          </div>
+          <div>
+            <div class="url-row danger"><span class="url-tag">偽物</span>line.me.auth-check.com/login</div>
+            <div class="url-reason">← 本当のドメインは末尾の .com（auth-check.com）</div>
+          </div>
+          <div>
+            <div class="url-row safe"><span class="url-tag">本物</span>instagram.com/accounts/login</div>
+          </div>
+          <div>
+            <div class="url-row danger"><span class="url-tag">偽物</span>instagram-login.net/accounts</div>
+            <div class="url-reason">← instagram.com ではなく instagram-login.net</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- やるべきこと -->
+      <div class="safe-box">
+        <h2>✅ 今すぐできる対策</h2>
+        <div class="safe-list">
+          <div class="safe-item">
+            <div class="safe-icon">✓</div>
+            <div>LINEとInstagramで<strong style="color:white">パスキー or 二段階認証</strong>を設定する（認証コードを入力しても乗っ取られにくくなる）</div>
+          </div>
+          <div class="safe-item">
+            <div class="safe-icon">✓</div>
+            <div>怪しいと思ったら、<strong style="color:white">ブラウザのアドレスバーのURLを必ず確認</strong>する</div>
+          </div>
+          <div class="safe-item">
+            <div class="safe-icon">✓</div>
+            <div>リンクを踏む前に、<strong style="color:white">友達に別の手段（電話など）で確認</strong>する</div>
+          </div>
+          <div class="safe-item">
+            <div class="safe-icon">✓</div>
+            <div>もし入力してしまったら、<strong style="color:white">すぐにパスワード変更・全端末ログアウト・連携アプリの削除</strong>を行う</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 公式資料 -->
+      <div class="section-label">公式資料</div>
+      <div class="resources">
+        <a class="resource-link" href="https://www.kokusen.go.jp/pdf/n-20221221_2.pdf" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="resource-name">国民生活センター</div>
+            <div class="resource-desc">フィッシング詐欺の手口と対策PDF</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a class="resource-link" href="https://www.antiphishing.jp/" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="resource-name">フィッシング対策協議会</div>
+            <div class="resource-desc">最新の事例・注意喚起情報</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a class="resource-link" href="https://www.npa.go.jp/bureau/cyber/countermeasures/phishing.html" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="resource-name">警察庁 サイバー局</div>
+            <div class="resource-desc">フィッシング対策・相談窓口</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a class="resource-link" href="https://support.line.me/hc/ja/articles/115003505631" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="resource-name">LINE 公式：乗っ取り被害に遭ったら</div>
+            <div class="resource-desc">被害時の対処法・相談窓口</div>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <div class="reveal-footer">
+        <p>
+          このデモは<strong>フィッシング詐欺への注意喚起</strong>を目的として作成されました。<br />
+          個人情報・LINE情報・認証コードは一切取得していません。<br />
+          LINEの商標・ロゴは LINE ヤフー株式会社に帰属します。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function goLoading() {
+      document.getElementById('screen-fake').classList.remove('active');
+      document.getElementById('screen-loading').classList.add('active');
+
+      // 2秒ローディングの後タネ明かし（リアルな間を作りつつ予告を読む時間を確保）
+      setTimeout(() => {
+        document.getElementById('screen-loading').classList.remove('active');
+        document.getElementById('screen-reveal').classList.add('active');
+        window.scrollTo({ top: 0 });
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
