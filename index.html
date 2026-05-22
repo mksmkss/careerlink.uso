@@ -548,8 +548,8 @@
     }
 
     .dev-title {
-      font-size: 15px; font-weight: 900;
-      color: #e2e8f0; margin: 0;
+      font-size: 16px; font-weight: 900;
+      color: #e2e8f0; margin: 0 0 10px;
     }
 
     .dev-lead {
@@ -1044,62 +1044,42 @@
         </div>
       </div>
 
-      <!-- エンジニア向け解説 -->
+      <!-- URL構造の解説 -->
       <div class="dev-box">
-        <div class="dev-box-header">
-          <span class="dev-tag">&lt;/&gt; for developers</span>
-          <h2 class="dev-title">URLの仕組みを知っていると騙されにくい</h2>
-        </div>
-
-        <p class="dev-lead">プログラミングをかじったことがある人向けの補足です。</p>
+        <h2 class="dev-title">🔐 URLには「ニセモノ」を作れる仕掛けがある</h2>
+        <p class="dev-lead">これを知っているだけで、騙されにくくなります。</p>
 
         <div class="dev-section">
-          <div class="dev-section-title">▸ URLの構造</div>
-          <div class="dev-code">
-            <span class="dc-scheme">https</span><span class="dc-dim">://</span><span class="dc-sub">secure.login</span><span class="dc-dim">.</span><span class="dc-domain">line.me</span><span class="dc-path">/auth</span><span class="dc-query">?token=xxx</span>
-          </div>
-          <div class="dev-legend">
-            <span class="dl-item"><span class="dl-dot" style="background:#818cf8"></span>スキーム</span>
-            <span class="dl-item"><span class="dl-dot" style="background:#38bdf8"></span>サブドメイン（自由に作れる）</span>
-            <span class="dl-item"><span class="dl-dot" style="background:#f472b6"></span>ドメイン（ここが本体）</span>
-            <span class="dl-item"><span class="dl-dot" style="background:#4ade80"></span>パス</span>
-            <span class="dl-item"><span class="dl-dot" style="background:#fbbf24"></span>クエリ</span>
-          </div>
-        </div>
-
-        <div class="dev-section">
-          <div class="dev-section-title">▸ サブドメインは誰でも無限に作れる</div>
+          <div class="dev-section-title">▸ 「line.me が入っていれば本物」は間違い</div>
           <p class="dev-body">
-            <code>aaa.com</code> というドメインを1つ持っていれば、<code>line.aaa.com</code> も
-            <code>secure.login.line.aaa.com</code> も自由に作れます。費用はほぼゼロ、数分で完了します。
+            インターネットのアドレス（URL）は、誰でも好きな文字列を「前につける」ことができます。<br />
+            たとえば <strong style="color:#f87171">auth-verify.com</strong> というサイトを持っていれば、
+            その前に <strong style="color:#38bdf8">secure.line.me.</strong> と付けて
+            <strong style="color:#f87171">secure.line.me.auth-verify.com</strong> というアドレスを
+            数分・ほぼ無料で作れてしまいます。
           </p>
-          <div class="dev-code dev-code--bad">
-            <span class="dc-dim">❌ </span><span class="dc-sub">secure.line.me</span><span class="dc-dim">.</span><span class="dc-domain-bad">auth-verify.com</span><span class="dc-path">/login</span>
-          </div>
-          <p class="dev-caption">← 本当のドメインは右端の <strong>auth-verify.com</strong>。<code>secure.line.me</code> はサブドメインに過ぎない。</p>
+          <div class="dev-code dev-code--bad">❌&nbsp; secure.line.me.<strong>auth-verify.com</strong>/login</div>
+          <p class="dev-caption">← 「line.me」が入っていても、末尾の <strong>auth-verify.com</strong> が本当の運営者。LINEとは無関係。</p>
         </div>
 
         <div class="dev-section">
-          <div class="dev-section-title">▸ 本物の招待リンクはどう見える？</div>
+          <div class="dev-section-title">▸ URLの「本体」はどこ？</div>
           <p class="dev-body">
-            本物のサービスが招待コードやIDをURLに含める場合、パスやクエリパラメータを使います。
-            これ自体は普通の実装です。
+            アドレスの中で信頼できる部分は、<strong style="color:#e2e8f0">「https://」の直後にある、最初の「/」より前の、末尾2ブロック</strong>だけです。
           </p>
-          <div class="dev-code dev-code--good">
-            <span class="dc-dim">✅ </span><span class="dc-domain">line.me</span><span class="dc-path">/R/ti/p/@username</span>
-          </div>
-          <div class="dev-code dev-code--good">
-            <span class="dc-dim">✅ </span><span class="dc-domain">service.com</span><span class="dc-path">/invite</span><span class="dc-query">?code=ABC123&ref=user_456</span>
-          </div>
-          <p class="dev-caption">← ドメイン部分が正規のものであれば、長いパスやクエリは怪しくない。</p>
+          <div class="dev-code dev-code--good">✅&nbsp; <strong>line.me</strong>/R/ti/p/@xxx　　← 末尾2ブロックが line.me ✓</div>
+          <div class="dev-code dev-code--bad">❌&nbsp; secure.line.<strong>auth-check.com</strong>/login　← 末尾2ブロックが auth-check.com ✗</div>
+          <p class="dev-caption">「/」より後ろの文字列（/invite?code=ABC など）はいくらでも長くなるので、そこに惑わされないようにしましょう。</p>
         </div>
 
         <div class="dev-section">
-          <div class="dev-section-title">▸ 確認のコツ：スラッシュの左だけ見る</div>
+          <div class="dev-section-title">▸ 長いURLは怪しい？</div>
           <p class="dev-body">
-            <code>https://</code> の直後、最初の <code>/</code> が来るまでの部分だけがドメインです。
-            そこに知っているサービス名が含まれていても、<strong>一番右のドット区切りの2ブロック</strong>だけが本物のドメイン（<code>line.me</code> / <code>yahoo.co.jp</code> など）です。
+            友達の招待リンクや認証URLは、本物でも長くなりがちです。<br />
+            大切なのは長さではなく、<strong style="color:#e2e8f0">末尾2ブロックのドメインが正規かどうか</strong>だけです。
           </p>
+          <div class="dev-code dev-code--good">✅&nbsp; <strong>instagram.com</strong>/accounts/login?next=%2F　← 長くても本物</div>
+          <div class="dev-code dev-code--bad">❌&nbsp; <strong>instagram-secure.net</strong>/accounts/login　← 短くても偽物</div>
         </div>
       </div>
 
