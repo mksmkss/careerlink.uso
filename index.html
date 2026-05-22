@@ -563,6 +563,48 @@
     .reveal-footer p { font-size: 12px; color: #475569; line-height: 1.8; }
     .reveal-footer strong { color: #64748b; }
 
+    /* ─ Author message ─ */
+    .author-msg {
+      margin-bottom: 32px;
+      animation: fadeUp .4s ease both;
+    }
+
+    .author-msg-inner {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      padding: 28px 24px;
+    }
+
+    .author-msg-main {
+      font-size: 22px; font-weight: 900;
+      color: white; line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .author-msg-main em {
+      color: var(--red); font-style: normal;
+    }
+
+    .author-msg-sub {
+      font-size: 15px; color: #94a3b8;
+      margin-bottom: 22px; line-height: 1.6;
+    }
+
+    .author-msg-reason {
+      background: rgba(0,0,0,.25);
+      border-left: 3px solid #475569;
+      border-radius: 0 12px 12px 0;
+      padding: 14px 16px;
+      font-size: 13px; color: #94a3b8; line-height: 1.8;
+    }
+
+    .author-msg-reason-label {
+      display: block;
+      font-size: 10px; font-weight: 900; letter-spacing: .1em;
+      color: #64748b; margin-bottom: 8px;
+    }
+
     /* ─ Share box ─ */
     .share-box {
       margin-bottom: 28px;
@@ -580,8 +622,9 @@
       font-size: 13px; color: #94a3b8; line-height: 1.7;
     }
 
-    .share-disclaimer {
+    .share-disclaimer-block {
       font-size: 11px; color: #475569;
+      margin-top: 8px; line-height: 1.6;
     }
 
     .share-templates { display: grid; gap: 12px; }
@@ -755,6 +798,26 @@
   <div id="screen-reveal" class="screen">
     <div class="reveal-inner">
 
+      <!-- 作者メッセージ -->
+      <div class="author-msg">
+        <div class="author-msg-inner">
+          <p class="author-msg-main">
+            ウキウキでクリックしてくれた方、<br />
+            残念ながら<em>お金は一切払われません。</em><br />
+            ごめんなさい。
+          </p>
+          <p class="author-msg-sub">
+            でも、あなたのリテラシーは少し上がったかと思います。
+          </p>
+          <div class="author-msg-reason">
+            <span class="author-msg-reason-label">なぜこのサイトを作ったか</span>
+            ある日、友人が1日に3人以上LINEアカウントを乗っ取られました。<br />
+            全員が「友達から来たメッセージだから」と信じて踏んだリンクが原因でした。<br />
+            同じ被害者を出したくなくて、このデモを作りました。
+          </div>
+        </div>
+      </div>
+
       <!-- Header -->
       <div class="reveal-header">
         <div class="reveal-eyebrow">⚠ 注意喚起デモ</div>
@@ -902,10 +965,14 @@
       <!-- Share -->
       <div class="share-box">
         <div class="share-header">
-          <div class="share-eyebrow">📢 友達にも体験させてみる？</div>
+          <div class="share-eyebrow">あなたの友人も、守れるかもしれない。</div>
           <p class="share-desc">
-            同じメッセージを友達に送って、詐欺の手口を体感してもらおう。<br />
-            <span class="share-disclaimer">※ 友人関係への影響・亀裂等については一切責任を負いません。自己責任でどうぞ。</span>
+            下のメッセージをそのまま友達に送ってみてください。<br />
+            友達がリンクを踏んだとき、このページが表示されます。<br />
+            それだけで、あなたの友人がフィッシング詐欺に引っかかるリスクが下がります。
+          </p>
+          <p class="share-disclaimer-block">
+            ※ 友人関係への影響・亀裂等については一切責任を負いません。自己責任でどうぞ。
           </p>
         </div>
 
