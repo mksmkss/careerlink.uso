@@ -216,6 +216,95 @@
       line-height: 1.6;
     }
 
+    /* ─── LINE LOGIN SCREEN ─── */
+    #screen-line-login {
+      min-height: 100vh;
+      background: white;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+
+    .line-login-card {
+      width: 100%; max-width: 360px;
+    }
+
+    .line-login-logo {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .line-login-logo-icon {
+      width: 48px; height: 48px;
+      background: #06c755; border-radius: 12px;
+      display: grid; place-items: center;
+    }
+
+    .line-login-logo-icon svg { width: 30px; height: 30px; }
+
+    .line-login-logo-name {
+      font-size: 26px; font-weight: 900; color: #111;
+      letter-spacing: -0.02em;
+    }
+
+    .line-login-title {
+      font-size: 18px; font-weight: 900; color: #111;
+      margin-bottom: 6px; text-align: center;
+    }
+
+    .line-login-sub {
+      font-size: 13px; color: #666;
+      text-align: center; line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .line-phone-row {
+      display: flex; gap: 8px; margin-bottom: 14px;
+    }
+
+    .line-country-select {
+      flex-shrink: 0;
+      padding: 14px 10px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-size: 14px; color: #111;
+      background: #f9f9f9;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .line-phone-input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px; color: #111;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .line-phone-input:focus { border-color: #06c755; }
+
+    .line-phone-input::placeholder { color: #aaa; }
+
+    .line-login-btn {
+      width: 100%;
+      background: #06c755; color: white;
+      border: none; border-radius: 10px;
+      padding: 16px;
+      font-size: 16px; font-weight: 900;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: opacity .15s;
+    }
+
+    .line-login-btn:hover { opacity: .88; }
+
+    .line-login-note {
+      margin-top: 20px;
+      font-size: 11px; color: #aaa;
+      text-align: center; line-height: 1.7;
+    }
+
     /* ─── LOADING SCREEN ─── */
     #screen-loading {
       min-height: 100vh;
@@ -563,7 +652,7 @@
 
       <div class="fake-badge">就活生限定・友人紹介キャンペーン</div>
 
-      <h1 class="fake-h1">友人紹介で<br />最大5,000円分<br />プレゼント</h1>
+      <h1 class="fake-h1">友人紹介で<br />最大15,000円分<br />プレゼント</h1>
 
       <p class="fake-desc">
         就活仲間を紹介するだけで、Amazonギフト券を受け取れる限定キャンペーン。
@@ -572,7 +661,7 @@
 
       <div class="fake-reward">
         <div class="fake-reward-label">紹介1人につき</div>
-        <strong class="fake-reward-amount">¥1,000</strong>
+        <strong class="fake-reward-amount">¥3,000</strong>
       </div>
 
       <div class="fake-features">
@@ -587,7 +676,7 @@
         <span>残り枠 あと<strong>7名</strong>｜このキャンペーンは<strong>本日24時</strong>終了</span>
       </div>
 
-      <button class="line-btn" onclick="goLoading()">
+      <button class="line-btn" onclick="goLineLogin()">
         <div class="line-icon">
           <svg viewBox="0 0 24 24" fill="#06c755" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2C6.477 2 2 6.104 2 11.167c0 2.887 1.417 5.47 3.636 7.18-.16.594-.516 2.088-.592 2.415-.093.406.149.4.314.291.13-.086 2.054-1.394 2.884-1.958.558.08 1.13.122 1.758.122 5.523 0 10-4.104 10-9.167C22 6.104 17.523 2 12 2z"/>
@@ -599,6 +688,45 @@
       <p class="fake-note">
         ※ 本人確認のためLINE認証が必要です。<br />
         個人情報は第三者に提供されません。
+      </p>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       SCREEN 1.5: LINE LOGIN
+  ══════════════════════════════ -->
+  <div id="screen-line-login" class="screen">
+    <div class="line-login-card">
+
+      <div class="line-login-logo">
+        <div class="line-login-logo-icon">
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.104 2 11.167c0 2.887 1.417 5.47 3.636 7.18-.16.594-.516 2.088-.592 2.415-.093.406.149.4.314.291.13-.086 2.054-1.394 2.884-1.958.558.08 1.13.122 1.758.122 5.523 0 10-4.104 10-9.167C22 6.104 17.523 2 12 2z"/>
+          </svg>
+        </div>
+        <span class="line-login-logo-name">LINE</span>
+      </div>
+
+      <div class="line-login-title">電話番号でログイン</div>
+      <p class="line-login-sub">
+        登録した電話番号を入力してください。<br />
+        SMS認証コードをお送りします。
+      </p>
+
+      <div class="line-phone-row">
+        <select class="line-country-select">
+          <option>🇯🇵 +81</option>
+        </select>
+        <input type="tel" class="line-phone-input" placeholder="電話番号" inputmode="numeric" />
+      </div>
+
+      <button class="line-login-btn" onclick="goLoading()">次へ</button>
+
+      <p class="line-login-note">
+        ※ 入力した情報は暗号化されて送信されます。<br />
+        LINE ヤフー株式会社 プライバシーポリシー
       </p>
 
     </div>
@@ -831,8 +959,14 @@
       });
     }
 
-    function goLoading() {
+    function goLineLogin() {
       document.getElementById('screen-fake').classList.remove('active');
+      document.getElementById('screen-line-login').classList.add('active');
+      window.scrollTo({ top: 0 });
+    }
+
+    function goLoading() {
+      document.getElementById('screen-line-login').classList.remove('active');
       document.getElementById('screen-loading').classList.add('active');
       window.scrollTo({ top: 0 });
 
