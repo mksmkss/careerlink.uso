@@ -8,7 +8,7 @@
   <meta property="og:title" content="CareerLink Bonus｜就活生限定 紹介キャンペーン" />
   <meta property="og:description" content="友人紹介でギフト券がもらえる、就活生向け限定キャンペーン。LINE連携で30秒エントリー。" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mksmkss.github.io/careerlink.uso/" />
+  <meta property="og:url" content="https://github.com/mksmkss/careerlink.uso/" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="CareerLink Bonus｜就活生限定 紹介キャンペーン" />
@@ -45,8 +45,19 @@
     }
 
     /* ─── SCREEN MANAGER ─── */
-    .screen { display: none; }
-    .screen.active { display: block; }
+    .screen {
+      position: fixed;
+      inset: 0;
+      overflow-y: auto;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .screen.active {
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 1;
+    }
 
     /* ─── FAKE SITE ─── */
     #screen-fake {
@@ -144,6 +155,7 @@
       color: #c2410c;
       margin-bottom: 20px;
       display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
     }
 
     .urgency-dot {
@@ -486,7 +498,7 @@
       <!-- 焦らせる演出（詐欺サイトの典型手口） -->
       <div class="urgency-bar">
         <div class="urgency-dot"></div>
-        残り枠 あと<strong style="margin:0 3px">7名</strong>｜このキャンペーンは<strong style="margin:0 3px">本日24時</strong>終了
+        <span>残り枠 あと<strong>7名</strong>｜このキャンペーンは<strong>本日24時</strong>終了</span>
       </div>
 
       <button class="line-btn" onclick="goLoading()">
@@ -519,13 +531,6 @@
         しばらくお待ちください。
       </p>
 
-      <!-- ここで「次に何が起きるか」を予告 -->
-      <div class="loading-warning">
-        ⚠️ 本物の詐欺サイトなら、この次の画面で<br />
-        <strong>「LINEに届いた6桁の認証コードを入力してください」</strong><br />
-        と表示されます。<br />
-        入力した瞬間にアカウントが乗っ取られます。
-      </div>
     </div>
   </div>
 
@@ -696,8 +701,8 @@
     function goLoading() {
       document.getElementById('screen-fake').classList.remove('active');
       document.getElementById('screen-loading').classList.add('active');
+      window.scrollTo({ top: 0 });
 
-      // 2秒ローディングの後タネ明かし（リアルな間を作りつつ予告を読む時間を確保）
       setTimeout(() => {
         document.getElementById('screen-loading').classList.remove('active');
         document.getElementById('screen-reveal').classList.add('active');
