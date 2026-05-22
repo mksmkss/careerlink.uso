@@ -526,6 +526,101 @@
       margin-top: 4px;
     }
 
+    /* ─ Developer box ─ */
+    .dev-box {
+      background: rgba(99,102,241,.07);
+      border: 1px solid rgba(99,102,241,.2);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 28px;
+      animation: fadeUp .5s .38s ease both;
+    }
+
+    .dev-box-header { margin-bottom: 10px; }
+
+    .dev-tag {
+      display: inline-block;
+      background: rgba(99,102,241,.2); color: #a5b4fc;
+      font-size: 10px; font-weight: 900; letter-spacing: .1em;
+      padding: 3px 10px; border-radius: 6px;
+      font-family: var(--mono);
+      margin-bottom: 8px;
+    }
+
+    .dev-title {
+      font-size: 15px; font-weight: 900;
+      color: #e2e8f0; margin: 0;
+    }
+
+    .dev-lead {
+      font-size: 12px; color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    .dev-section { margin-bottom: 18px; }
+    .dev-section:last-child { margin-bottom: 0; }
+
+    .dev-section-title {
+      font-size: 11px; font-weight: 900;
+      color: #818cf8; letter-spacing: .06em;
+      margin-bottom: 8px;
+    }
+
+    .dev-body {
+      font-size: 13px; color: #94a3b8;
+      line-height: 1.7; margin-bottom: 8px;
+    }
+
+    .dev-body code, .dev-caption code {
+      font-family: var(--mono);
+      background: rgba(255,255,255,.08);
+      padding: 1px 5px; border-radius: 4px;
+      font-size: 12px; color: #e2e8f0;
+    }
+
+    .dev-code {
+      font-family: var(--mono);
+      font-size: 13px;
+      background: rgba(0,0,0,.3);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .dev-code--good { border-left: 3px solid #4ade80; }
+    .dev-code--bad  { border-left: 3px solid #f87171; }
+
+    .dc-scheme  { color: #818cf8; }
+    .dc-sub     { color: #38bdf8; }
+    .dc-domain  { color: #f472b6; font-weight: 900; }
+    .dc-domain-bad { color: #f87171; font-weight: 900; }
+    .dc-path    { color: #4ade80; }
+    .dc-query   { color: #fbbf24; }
+    .dc-dim     { color: #475569; }
+
+    .dev-legend {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .dl-item {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 11px; color: #64748b;
+    }
+
+    .dl-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dev-caption {
+      font-size: 12px; color: #64748b; line-height: 1.6;
+    }
+
+    .dev-caption strong { color: #94a3b8; }
+
     /* ─ Official resources ─ */
     .resources {
       display: grid; gap: 10px;
@@ -946,6 +1041,65 @@
             <div class="url-row danger"><span class="url-tag">偽物</span>instagram-login.net/accounts</div>
             <div class="url-reason">← instagram.com ではなく instagram-login.net</div>
           </div>
+        </div>
+      </div>
+
+      <!-- エンジニア向け解説 -->
+      <div class="dev-box">
+        <div class="dev-box-header">
+          <span class="dev-tag">&lt;/&gt; for developers</span>
+          <h2 class="dev-title">URLの仕組みを知っていると騙されにくい</h2>
+        </div>
+
+        <p class="dev-lead">プログラミングをかじったことがある人向けの補足です。</p>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ URLの構造</div>
+          <div class="dev-code">
+            <span class="dc-scheme">https</span><span class="dc-dim">://</span><span class="dc-sub">secure.login</span><span class="dc-dim">.</span><span class="dc-domain">line.me</span><span class="dc-path">/auth</span><span class="dc-query">?token=xxx</span>
+          </div>
+          <div class="dev-legend">
+            <span class="dl-item"><span class="dl-dot" style="background:#818cf8"></span>スキーム</span>
+            <span class="dl-item"><span class="dl-dot" style="background:#38bdf8"></span>サブドメイン（自由に作れる）</span>
+            <span class="dl-item"><span class="dl-dot" style="background:#f472b6"></span>ドメイン（ここが本体）</span>
+            <span class="dl-item"><span class="dl-dot" style="background:#4ade80"></span>パス</span>
+            <span class="dl-item"><span class="dl-dot" style="background:#fbbf24"></span>クエリ</span>
+          </div>
+        </div>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ サブドメインは誰でも無限に作れる</div>
+          <p class="dev-body">
+            <code>aaa.com</code> というドメインを1つ持っていれば、<code>line.aaa.com</code> も
+            <code>secure.login.line.aaa.com</code> も自由に作れます。費用はほぼゼロ、数分で完了します。
+          </p>
+          <div class="dev-code dev-code--bad">
+            <span class="dc-dim">❌ </span><span class="dc-sub">secure.line.me</span><span class="dc-dim">.</span><span class="dc-domain-bad">auth-verify.com</span><span class="dc-path">/login</span>
+          </div>
+          <p class="dev-caption">← 本当のドメインは右端の <strong>auth-verify.com</strong>。<code>secure.line.me</code> はサブドメインに過ぎない。</p>
+        </div>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ 本物の招待リンクはどう見える？</div>
+          <p class="dev-body">
+            本物のサービスが招待コードやIDをURLに含める場合、パスやクエリパラメータを使います。
+            これ自体は普通の実装です。
+          </p>
+          <div class="dev-code dev-code--good">
+            <span class="dc-dim">✅ </span><span class="dc-domain">line.me</span><span class="dc-path">/R/ti/p/@username</span>
+          </div>
+          <div class="dev-code dev-code--good">
+            <span class="dc-dim">✅ </span><span class="dc-domain">service.com</span><span class="dc-path">/invite</span><span class="dc-query">?code=ABC123&ref=user_456</span>
+          </div>
+          <p class="dev-caption">← ドメイン部分が正規のものであれば、長いパスやクエリは怪しくない。</p>
+        </div>
+
+        <div class="dev-section">
+          <div class="dev-section-title">▸ 確認のコツ：スラッシュの左だけ見る</div>
+          <p class="dev-body">
+            <code>https://</code> の直後、最初の <code>/</code> が来るまでの部分だけがドメインです。
+            そこに知っているサービス名が含まれていても、<strong>一番右のドット区切りの2ブロック</strong>だけが本物のドメイン（<code>line.me</code> / <code>yahoo.co.jp</code> など）です。
+          </p>
         </div>
       </div>
 
